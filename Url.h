@@ -4,7 +4,7 @@
 #include <string>
 
 
-class Url()
+class Url
 {
 	private:
 		std::string url;
@@ -13,8 +13,8 @@ class Url()
 		Url(std::string& url);
 		virtual ~Url();
 
-		std::strig to_way();
-		std::strig to_root();
+		std::string to_way();
+		std::string to_root();
 }
 
 #endif
