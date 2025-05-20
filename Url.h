@@ -10,11 +10,12 @@ class Url
 		std::string url;
 
 	public:
-		Url(std::string& url);
+		Url(std::string url);
 		virtual ~Url();
 
-		std::string to_way();
-		std::string to_root();
-}
+		std::string get();
+		//std::string to_way();
+		//std::string to_root();
+};
 
 #endif
