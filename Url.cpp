@@ -13,3 +13,8 @@ std::string Url::get()
 {
     return url;
 }
+
+std::string Url::to_root()
+{
+    
+}

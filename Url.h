@@ -15,7 +15,7 @@ class Url
 
 		std::string get();
 		//std::string to_way();
-		//std::string to_root();
+		std::string to_root();
 };
 
 #endif
