@@ -8,6 +8,7 @@ class Url
 {
 	private:
 		std::string url;
+		std::string scheme;
 
 	public:
 		Url(std::string url);
@@ -15,7 +16,7 @@ class Url
 
 		std::string get();
 		//std::string to_way();
-		std::string to_root();
+		std::string to_scheme();
 };
 
 #endif
