@@ -1,11 +1,17 @@
-#define DEBUG
-#ifdef DEBUG
+//#define DEBUG
+//#ifdef DEBUG
+//#define DEBUG_CSTR_SIZE
+#ifdef DEBUG_CSTR_SIZE
 #include <iostream>
 #endif
 
 #include "Url.h"
 
-static const char* http_str = "http";
+static const std::string http_str = "http";
+static const std::string https_str = "https";
+static const char* url_empty = "Url empty.";
+static const char* scheme_host_div = "://";
+static const char* url_fail_size = "Url shceme don`t valid size.";
 
 class MyException : public std::exception
 {
@@ -24,11 +30,11 @@ class MyException : public std::exception
 
 Url::Url(std::string url) : url(url)
 {
-    if(url.length() == 0) throw MyException("Url empty.");
-    char scheme_size = url.find(":/");
-    if(scheme_size > 5) throw MyException("Url shceme don`t valid size.");
-    const char* test_scheme = url.substr(0, scheme_size).c_str();
-    bool is_scheme = test_scheme == http_str;
+    if(url.length() == 0) throw MyException(url_empty);
+    char scheme_end_pos = url.find(scheme_host_div);
+    if(scheme_end_pos > 5) throw MyException(url_fail_size);
+    const std::string test_scheme = url.substr(0, scheme_end_pos);
+    bool is_scheme { test_scheme == http_str || test_scheme == https_str };
     
     
 #ifdef DEBUG
@@ -52,12 +58,18 @@ Url::Url(std::string url) : url(url)
     std::cout << static_cast<int>(is_scheme) << '\n';
 #endif
 
-   //bool is_scheme = test_scheme == "http";
     if(is_scheme)
     {
         scheme = test_scheme;
     }
     else throw MyException("The url scheme must match http or https protocols.");
+
+    unsigned int start_host_pos = scheme.length() + 3; // scheme.length = : + / + / + e 
+    way = url.substr(start_host_pos);
+
+#ifdef DEBUG_CSTR_SIZE
+    std::cout << "!!! FIRST SYMVOL HOST: " << url[start_host_pos] << '\n';
+#endif
 
 }
 
@@ -70,7 +82,7 @@ std::string Url::get()
     return url;
 }
 
-std::string Url::to_scheme()
+std::string Url::get_scheme()
 {
     return scheme;
 }

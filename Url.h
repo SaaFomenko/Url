@@ -9,14 +9,16 @@ class Url
 	private:
 		std::string url;
 		std::string scheme;
+		std::string way;
+		std::string host;
 
 	public:
 		Url(std::string url);
 		virtual ~Url();
 
 		std::string get();
-		//std::string to_way();
-		std::string to_scheme();
+		std::string get_scheme();
+		std::string to_way();
 };
 
 #endif
